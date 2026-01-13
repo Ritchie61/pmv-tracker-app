@@ -1,25 +1,29 @@
-pmv-tracker-app/
+pmv-tracker-png/                  # Main GitHub Repository
 │
-├── .github/workflows   # CI/CD pipelines (Flutter build tests)
-│   └── flutter-ci.yml
+├── .devcontainer/                # GitHub Codespaces Configuration
+│   ├── devcontainer.json         # VS Code environment setup
+│   └── Dockerfile                # Container with Flutter pre-installed
 │
-├── android/            # Android-specific files
-├── ios/                # iOS-specific files (auto-generated)
-├── lib/                # Core Flutter/Dart code
-│   ├── main.dart       # App entry point
+├── .github/workflows/            # CI/CD Automation
+│   └── flutter-ci.yml            # Build & test on every push
+│
+├── android/                      # Android-specific files
+├── ios/                          # iOS-specific files (auto-generated)
+├── lib/                          # Core Flutter/Dart code
+│   ├── main.dart                 # App entry point
 │   ├── core/
-│   │   ├── constants.dart  # App constants, map style URL
-│   │   └── app_router.dart # Navigation routing
+│   │   ├── constants.dart        # App constants, Supabase config
+│   │   └── app_router.dart       # Navigation routing
 │   ├── data/
-│   │   ├── models/     # Data models (e.g., pmv_report.dart)
-│   │   └── repository/ # Handles all API calls to Supabase
+│   │   ├── models/               # Data models (pmv_report.dart)
+│   │   └── repository/           # Supabase API calls
 │   ├── presentation/
-│   │   ├── screens/    # Full screens (map_view, report_screen)
-│   │   └── widgets/    # Reusable UI components (report_button)
-│   └── utils/          # Helper functions (location, time formatting)
+│   │   ├── screens/              # Map screen, report screen
+│   │   └── widgets/              # Reusable UI components
+│   └── utils/                    # Helpers (location, formatting)
 │
-├── assets/             # Icons, images, fonts
-├── web/                # Auto-generated for web build (for landing page)
-├── pubspec.yaml        # Flutter dependencies (CRITICAL FILE)
-├── README.md           # Project overview, setup instructions
-└── LICENSE             # Open-source license (MIT recommended)
+├── assets/                       # Icons, images, fonts
+├── web/                          # Web build for PWA deployment
+├── pubspec.yaml                  # Flutter dependencies (CRITICAL)
+├── README.md                     # Setup instructions for cloud dev
+└── LICENSE                       # MIT license recommended
