@@ -1,0 +1,11 @@
+{
+  "name": "PMV Tracker",
+  "short_name": "PMV Tracker",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0175C2",
+  "theme_color": "#0175C2",
+  "description": "A crowdsourced PMV tracking app for PNG.",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false
+}
