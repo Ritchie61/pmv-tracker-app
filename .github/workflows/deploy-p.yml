@@ -1,11 +1,14 @@
 name: Deploy to GitHub Pages
+
 on:
   push:
     branches: [ main ]
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,18 +16,33 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - run: flutter pub get
-      - run: flutter build web --release --base-href /pmv-tracker-png/
+
+      # Ensure commands run in your project root
+      - name: Install Dependencies
+        run: cd pmv_tracker && flutter pub get
+        # If your project is NOT in a subfolder, use just: `flutter pub get`
+
+      - name: Build Web App
+        run: cd pmv_tracker && flutter build web --release --base-href /pmv-tracker-png/
+        # If your project is NOT in a subfolder, use: `flutter build web --release --base-href /pmv-tracker-png/`
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3  # This is the CURRENT version
+
+      # CRITICAL FIX: Updated to v4
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: './build/web'
+          path: './pmv_tracker/build/web'
+          # If your project is NOT in a subfolder, use: './build/web'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
