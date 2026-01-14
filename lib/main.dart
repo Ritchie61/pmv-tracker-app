@@ -28,7 +28,7 @@ class _ErrorWidgetBuilderState extends State<ErrorWidgetBuilder> {
   // Object to store any error that occurs
   Object? _error;
   // Stack trace for the error (useful for debugging)
-  StackTrace? _stackTrace;
+  StackTrace? __stackTrace;
   // Tracks if Supabase initialized successfully
   bool _supabaseInitialized = false;
   String _supabaseStatus = 'Initializing...';
