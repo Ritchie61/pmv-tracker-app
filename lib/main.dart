@@ -4,18 +4,14 @@ import 'package:pmv_tracker/core/constants.dart';
 import 'package:pmv_tracker/presentation/screens/map_screen.dart';
 
 void main() async {
-  // Catches errors thrown during the app's startup/initialization
   WidgetsFlutterBinding.ensureInitialized();
-
   runApp(
-    // This widget catches errors that happen during build and displays them
     ErrorWidgetBuilder(
       child: const MyApp(),
     ),
   );
 }
 
-// A widget to gracefully catch and display errors
 class ErrorWidgetBuilder extends StatefulWidget {
   final Widget child;
   const ErrorWidgetBuilder({super.key, required this.child});
@@ -25,18 +21,16 @@ class ErrorWidgetBuilder extends StatefulWidget {
 }
 
 class _ErrorWidgetBuilderState extends State<ErrorWidgetBuilder> {
-  // Object to store any error that occurs
   Object? _error;
-  // Stack trace for the error (useful for debugging)
-  StackTrace? __stackTrace;
-  // Tracks if Supabase initialized successfully
+  // FIX: The field is declared but marked as unused for the linter.
+  // ignore: unused_field
+  StackTrace? _stackTrace;
   bool _supabaseInitialized = false;
   String _supabaseStatus = 'Initializing...';
 
   @override
   void initState() {
     super.initState();
-    // Try to initialize Supabase when the app starts
     _initializeApp();
   }
 
@@ -52,10 +46,10 @@ class _ErrorWidgetBuilderState extends State<ErrorWidgetBuilder> {
         _supabaseStatus = 'Connected to Supabase ✅';
       });
     } catch (e, st) {
-      // If Supabase fails, store the error to display it
+      // FIX: The '_stackTrace' field is now properly assigned.
       setState(() {
         _error = e;
-        _stackTrace = st;
+        _stackTrace = st; // This line now works because _stackTrace is defined.
         _supabaseStatus = 'Failed to connect to Supabase ❌';
       });
     }
@@ -63,7 +57,6 @@ class _ErrorWidgetBuilderState extends State<ErrorWidgetBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    // If there's an error, show it on a red screen with details
     if (_error != null) {
       return MaterialApp(
         home: Scaffold(
@@ -98,8 +91,6 @@ class _ErrorWidgetBuilderState extends State<ErrorWidgetBuilder> {
         ),
       );
     }
-
-    // If no error yet, show the main app with a debug banner
     return MaterialApp(
       title: 'PMV Tracker - Wei Bai?',
       theme: ThemeData(
@@ -107,11 +98,10 @@ class _ErrorWidgetBuilderState extends State<ErrorWidgetBuilder> {
         useMaterial3: true,
       ),
       home: _supabaseInitialized ? const MapScreen() : _buildLoadingScreen(),
-      debugShowCheckedModeBanner: true, // Shows "DEBUG" banner
+      debugShowCheckedModeBanner: true,
     );
   }
 
-  // Shows a loading screen while Supabase initializes
   Widget _buildLoadingScreen() {
     return Scaffold(
       appBar: AppBar(title: const Text('Loading...')),
@@ -136,7 +126,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // This is the main app that runs after initialization succeeds
     return MaterialApp(
       title: 'PMV Tracker - Wei Bai?',
       theme: ThemeData(
