@@ -24,24 +24,22 @@ jobs:
         with:
           channel: 'stable'
 
-      # Ensure commands run in your project root
+      # FIXED: Runs from the root, where pubspec.yaml is.
       - name: Install Dependencies
-        run: cd pmv_tracker && flutter pub get
-        # If your project is NOT in a subfolder, use just: `flutter pub get`
+        run: flutter pub get
 
+      # FIXED: Builds from the root.
       - name: Build Web App
-        run: cd pmv_tracker && flutter build web --release --base-href /pmv-tracker-png/
-        # If your project is NOT in a subfolder, use: `flutter build web --release --base-href /pmv-tracker-png/`
+        run: flutter build web --release --base-href /pmv-tracker-png/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      # CRITICAL FIX: Updated to v4
+      # FIXED: Points to the correct build output location.
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: './pmv_tracker/build/web'
-          # If your project is NOT in a subfolder, use: './build/web'
+          path: './build/web'
 
       - name: Deploy to GitHub Pages
         id: deployment
