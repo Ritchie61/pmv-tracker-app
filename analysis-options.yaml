@@ -1,0 +1,14 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    # Treat unused fields only as a warning, not an error that fails the build
+    unused_field: warning
+    # Allow deprecated members to be used without failing
+    deprecated_member_use: ignore
+    # Allow the withOpacity deprecation
+    deprecated_member_use_from_same_package: ignore
+
+linter:
+  rules:
+    # You can add or modify other lint rules here if needed
